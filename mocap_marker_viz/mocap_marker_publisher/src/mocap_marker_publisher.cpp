@@ -19,8 +19,8 @@
 #include <iostream>
 
 #include "rclcpp/rclcpp.hpp"
-#include "mocap_msgs/msg/marker.hpp"
-#include "mocap_msgs/msg/markers.hpp"
+#include "mocap4r2_msgs/msg/marker.hpp"
+#include "mocap4r2_msgs/msg/markers.hpp"
 
 using namespace std::chrono_literals;
 
@@ -30,16 +30,16 @@ public:
   MarkerPublisher()
   : Node("mocap_marker_publisher")
   {
-    publisher_ = this->create_publisher<mocap_msgs::msg::Markers>("markers", 10);
+    publisher_ = this->create_publisher<mocap4r2_msgs::msg::Markers>("markers", 10);
     timer_ = this->create_wall_timer(1000ms, std::bind(&MarkerPublisher::timer_callback, this));
   }
 
   void timer_callback()
   {
-    mocap_msgs::msg::Markers markers;
+    mocap4r2_msgs::msg::Markers markers;
     for (int i = 0; i < 10; i++) {
-      mocap_msgs::msg::Marker marker;
-      marker.id_type = mocap_msgs::msg::Marker::USE_INDEX;
+      mocap4r2_msgs::msg::Marker marker;
+      marker.id_type = mocap4r2_msgs::msg::Marker::USE_INDEX;
       marker.marker_index = i;
       marker.translation.x = 0;
       marker.translation.y = 0;
@@ -50,7 +50,7 @@ public:
   }
 
 private:
-  rclcpp::Publisher<mocap_msgs::msg::Markers>::SharedPtr publisher_;
+  rclcpp::Publisher<mocap4r2_msgs::msg::Markers>::SharedPtr publisher_;
   rclcpp::TimerBase::SharedPtr timer_;
 };
 

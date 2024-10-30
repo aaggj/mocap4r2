@@ -23,7 +23,7 @@
 
 #include <vector>
 
-#include "mocap_msgs/msg/rigid_body.hpp"
+#include "mocap4r2_msgs/msg/rigid_body.hpp"
 #include "mocap_robot_gt_msgs/srv/set_gt_origin.hpp"
 
 #include "rclcpp/rclcpp.hpp"

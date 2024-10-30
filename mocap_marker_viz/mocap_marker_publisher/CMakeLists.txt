@@ -20,11 +20,11 @@ find_package(ament_cmake REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 find_package(rclcpp REQUIRED)
-find_package(mocap_msgs REQUIRED)
+find_package(mocap4r2_msgs REQUIRED)
 
 add_executable(mocap_marker_publisher src/mocap_marker_publisher.cpp)
 
-ament_target_dependencies(mocap_marker_publisher rclcpp mocap_msgs)
+ament_target_dependencies(mocap_marker_publisher rclcpp mocap4r2_msgs)
 
 install(TARGETS
   mocap_marker_publisher

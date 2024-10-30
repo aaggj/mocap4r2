@@ -24,7 +24,7 @@
 
 #include <vector>
 
-#include "mocap_msgs/msg/rigid_bodies.hpp"
+#include "mocap4r2_msgs/msg/rigid_bodies.hpp"
 #include "mocap_robot_gt_msgs/srv/set_gt_origin.hpp"
 
 #include "rclcpp/rclcpp.hpp"
@@ -38,7 +38,7 @@ public:
   explicit GTNode(const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
 
 protected:
-  void rigid_bodies_callback(const mocap_msgs::msg::RigidBodies::SharedPtr msg);
+  void rigid_bodies_callback(const mocap4r2_msgs::msg::RigidBodies::SharedPtr msg);
   void set_gt_origin_callback(
     const std::shared_ptr<mocap_robot_gt_msgs::srv::SetGTOrigin::Request> req,
     std::shared_ptr<mocap_robot_gt_msgs::srv::SetGTOrigin::Response> resp);
@@ -49,7 +49,7 @@ protected:
   tf2_ros::TransformListener tf_listener_;
   std::shared_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster_;
 
-  rclcpp::Subscription<mocap_msgs::msg::RigidBodies>::SharedPtr rigid_body_sub_;
+  rclcpp::Subscription<mocap4r2_msgs::msg::RigidBodies>::SharedPtr rigid_body_sub_;
   rclcpp::Service<mocap_robot_gt_msgs::srv::SetGTOrigin>::SharedPtr set_gt_origin_srv_;
 
   std::string root_frame_;

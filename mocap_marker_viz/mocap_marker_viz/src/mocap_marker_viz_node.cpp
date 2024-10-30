@@ -52,11 +52,11 @@ MarkerVisualizer::MarkerVisualizer()
   get_parameter<std::string>("namespace", namespace_);
   get_parameter<std::string>("mocap_system", mocap_system_);
 
-  markers_subscription_ = this->create_subscription<mocap_msgs::msg::Markers>(
+  markers_subscription_ = this->create_subscription<mocap4r2_msgs::msg::Markers>(
     "markers", 1000, std::bind(&MarkerVisualizer::marker_callback, this, _1));
 
   // Rigid bodies
-  markers_subscription_rb_ = this->create_subscription<mocap_msgs::msg::RigidBodies>(
+  markers_subscription_rb_ = this->create_subscription<mocap4r2_msgs::msg::RigidBodies>(
     "rigid_bodies", 1000, std::bind(&MarkerVisualizer::rb_callback, this, _1));
 
   publisher_rb_ = this->create_publisher<visualization_msgs::msg::MarkerArray>(
@@ -91,7 +91,7 @@ const
 
 
 void
-MarkerVisualizer::marker_callback(const mocap_msgs::msg::Markers::SharedPtr msg) const
+MarkerVisualizer::marker_callback(const mocap4r2_msgs::msg::Markers::SharedPtr msg) const
 {
   if (publisher_->get_subscription_count() == 0) {
     return;
@@ -99,7 +99,7 @@ MarkerVisualizer::marker_callback(const mocap_msgs::msg::Markers::SharedPtr msg)
 
   static int counter = 0;
   visualization_msgs::msg::MarkerArray visual_markers;
-  for (const mocap_msgs::msg::Marker & marker : msg->markers) {
+  for (const mocap4r2_msgs::msg::Marker & marker : msg->markers) {
     visual_markers.markers.push_back(marker2visual(counter++, marker.translation));
   }
   publisher_->publish(visual_markers);
@@ -131,7 +131,7 @@ MarkerVisualizer::marker2visual(int index, const geometry_msgs::msg::Point & tra
 
 
 void
-MarkerVisualizer::rb_callback(const mocap_msgs::msg::RigidBodies::SharedPtr msg) const
+MarkerVisualizer::rb_callback(const mocap4r2_msgs::msg::RigidBodies::SharedPtr msg) const
 {
   if (publisher_rb_->get_subscription_count() == 0) {
     return;
@@ -141,10 +141,10 @@ MarkerVisualizer::rb_callback(const mocap_msgs::msg::RigidBodies::SharedPtr msg)
   static int counter_markers_rb = 0;
   visualization_msgs::msg::MarkerArray visual_markers_rb;
 
-  for (const mocap_msgs::msg::RigidBody & rb : msg->rigidbodies) {
+  for (const mocap4r2_msgs::msg::RigidBody & rb : msg->rigidbodies) {
     visual_markers_rb.markers.push_back(rb2visual(counter_rb++, rb.pose));
 
-    for (const mocap_msgs::msg::Marker & marker : rb.markers) {
+    for (const mocap4r2_msgs::msg::Marker & marker : rb.markers) {
       visual_markers_rb.markers.push_back(marker2visual(counter_markers_rb++, marker.translation));
     }
   }

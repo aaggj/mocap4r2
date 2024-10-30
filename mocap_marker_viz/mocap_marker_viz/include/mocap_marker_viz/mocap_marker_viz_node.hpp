@@ -26,10 +26,10 @@
 #include "rclcpp/rclcpp.hpp"
 #include "visualization_msgs/msg/marker_array.hpp"
 
-#include "mocap_msgs/msg/marker.hpp"
-#include "mocap_msgs/msg/markers.hpp"
-#include "mocap_msgs/msg/rigid_body.hpp"
-#include "mocap_msgs/msg/rigid_bodies.hpp"
+#include "mocap4r2_msgs/msg/marker.hpp"
+#include "mocap4r2_msgs/msg/markers.hpp"
+#include "mocap4r2_msgs/msg/rigid_body.hpp"
+#include "mocap4r2_msgs/msg/rigid_bodies.hpp"
 #include "geometry_msgs/msg/vector3.hpp"
 #include "geometry_msgs/msg/pose_with_covariance_stamped.hpp"
 #include "mocap_marker_viz_srvs/srv/set_marker_color.hpp"
@@ -48,8 +48,8 @@ public:
   MarkerVisualizer();
 
 private:
-  void marker_callback(const mocap_msgs::msg::Markers::SharedPtr msg) const;
-  void rb_callback(const mocap_msgs::msg::RigidBodies::SharedPtr msg) const;
+  void marker_callback(const mocap4r2_msgs::msg::Markers::SharedPtr msg) const;
+  void rb_callback(const mocap4r2_msgs::msg::RigidBodies::SharedPtr msg) const;
 
   visualization_msgs::msg::Marker marker2visual(
     int index, const geometry_msgs::msg::Point & translation) const;
@@ -60,10 +60,10 @@ private:
   geometry_msgs::msg::Pose mocap2rviz(const geometry_msgs::msg::Pose mocap_pose) const;
 
   rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr publisher_;
-  rclcpp::Subscription<mocap_msgs::msg::Markers>::SharedPtr markers_subscription_;
+  rclcpp::Subscription<mocap4r2_msgs::msg::Markers>::SharedPtr markers_subscription_;
 
   rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr publisher_rb_;
-  rclcpp::Subscription<mocap_msgs::msg::RigidBodies>::SharedPtr markers_subscription_rb_;
+  rclcpp::Subscription<mocap4r2_msgs::msg::RigidBodies>::SharedPtr markers_subscription_rb_;
 
   geometry_msgs::msg::Vector3 marker_scale_;
   float marker_lifetime_;
