@@ -1,4 +1,4 @@
-name: foxy
+name: foxy-devel
 
 on:
   pull_request:
@@ -20,6 +20,15 @@ jobs:
         uses: ros-tooling/setup-ros@0.3.4
         with:
           required-ros-distributions: foxy
+      - name: Install empy
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip
+          pip3 install empy
+
+      - name: Remove conflicting package
+        run: |
+          pip uninstall -y em
       - name: build and test
         uses: ros-tooling/action-ros-ci@0.2.6
         with:
